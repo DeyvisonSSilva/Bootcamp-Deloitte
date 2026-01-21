@@ -6,9 +6,13 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int[] valores = new int[10];
+        Produto[] produtos = new Produto[10];
+        int indice = 0;
+
+
+        /* int[] valores = new int[10];
         String[] itens = new String[10];
-        String[] categorias = new String[10];
+        String[] categorias = new String[10]; */
 
         int escolha;
 
@@ -28,19 +32,49 @@ public class Main {
             switch (escolha) {
 
                 case 1:
-                    System.out.println("Digite o nome do item: ");
+
+                    System.out.print("Nome do produto: ");
+                    String nome = scanner.nextLine();
+
+                    System.out.print("Preço: ");
+                    float preco = Float.parseFloat(scanner.nextLine());
+
+                    System.out.print("Categoria: ");
+                    String categoria = scanner.nextLine();
+
+                    produtos[indice] = new Produto(nome, preco, categoria);
+                    indice++;
+
+                    System.out.println("Produto cadastrado com sucesso!");
+
+
+                    /* System.out.println("Digite o nome do item: ");
                     itens[0] = scanner.nextLine();
 
-                    System.out.println("Digite o valor do item: ");
+                    /* System.out.println("Digite o valor do item: ");
                     valores[0] = scanner.nextInt();
                     scanner.nextLine();
 
                     System.out.println("Digite a categoria do item: ");
-                    categorias[0] = scanner.nextLine();
+                    categorias[0] = scanner.nextLine(); */
                     break;
 
                 case 2:
-                    System.out.println("Digite o número do item que deseja consultar: ");
+                    System.out.println("Digite o número do produto que deseja consultar: ");
+                    int numero = Integer.parseInt(scanner.nextLine());
+
+                    // Ajuste porque o usuário digita 1, 2, 3... e o array começa em 01
+                    int posicao = numero - 1;
+
+                    if (posicao < 0 || posicao >= produtos.length || produtos[posicao] == null) {
+                        System.out.println("Não há nenhum produto com este número.");
+                    } else {
+                        System.out.println("Nome do produto: " + produtos[posicao].nome);
+                        System.out.println("Preço do produto: " + produtos[posicao].preco);
+                        System.out.println("Categoria do produto: " + produtos[posicao].categoria);
+                    }
+
+                    /* System.out.println("Digite o número do item que deseja consultar: ");
                     int numero = scanner.nextInt();
                     scanner.nextLine();
 
@@ -50,11 +84,35 @@ public class Main {
                         System.out.println("Nome do produto: " + itens[numero - 1]);
                         System.out.println("Valor do produto: " + valores[numero - 1]);
                         System.out.println("Categoria do produto: " + categorias[numero - 1]);
-                    }
+                    } */
                     break;
 
                 case 3:
-                    System.out.println("Digite o número do item que deseja alterar: ");
+                    System.out.print("Digite o número do produto que deseja alterar: ");
+                    numero = Integer.parseInt(scanner.nextLine());
+
+                    posicao = numero - 1;
+
+                    if (posicao < 0 || posicao >= produtos.length || produtos[posicao] == null) {
+                        System.out.println("Não há nenhum produto com este número.");
+                    } else {
+                        System.out.print("Digite o novo nome: ");
+                        String novoNome = scanner.nextLine();
+
+                        System.out.print("Digite o novo preço: ");
+                        float novoPreco = Float.parseFloat(scanner.nextLine());
+
+                        System.out.print("Digite a nova categoria: ");
+                        String novaCategoria = scanner.nextLine();
+
+                        produtos[posicao].nome = novoNome;
+                        produtos[posicao].preco = novoPreco;
+                        produtos[posicao].categoria = novaCategoria;
+
+                        System.out.println("Produto alterado com sucesso!");
+                    }
+
+                    /* System.out.println("Digite o número do item que deseja alterar: ");
                     numero = scanner.nextInt();
                     scanner.nextLine();
 
@@ -66,11 +124,23 @@ public class Main {
                     scanner.nextLine();
 
                     System.out.println("Digite a nova categoria: ");
-                    categorias[numero - 1] = scanner.nextLine();
+                    categorias[numero - 1] = scanner.nextLine(); */
                     break;
 
                 case 4:
-                    System.out.println("Digite o número do item que deseja remover: ");
+                    System.out.print("Digite o número do produto que deseja remover: ");
+                    numero = Integer.parseInt(scanner.nextLine());
+
+                    posicao = numero - 1;
+
+                    if (posicao < 0 || posicao >= produtos.length || produtos[posicao] == null) {
+                        System.out.println("Não há nenhum produto com este número.");
+                    } else {
+                        produtos[posicao] = null;
+                        System.out.println("Produto removido com sucesso!");
+                    }
+
+                    /* System.out.println("Digite o número do item que deseja remover: ");
                     numero = scanner.nextInt();
                     scanner.nextLine();
 
@@ -78,7 +148,7 @@ public class Main {
                     valores[numero - 1] = 0;
                     categorias[numero - 1] = null;
 
-                    System.out.println("Item removido!");
+                    System.out.println("Item removido!"); */
                     break;
 
                 case 5:
